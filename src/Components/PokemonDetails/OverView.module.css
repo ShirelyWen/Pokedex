@@ -1,0 +1,156 @@
+.Container {
+  display: flex;
+  align-items: center;
+  border: 1px solid red;
+  width: 100%;
+}
+
+.ImgContainer {
+  align-items: center;
+  width: 40%;
+}
+
+.DetailsContainer {
+  width: 60%;
+  padding: 15px 15px;
+}
+.TypeConatiner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.TypeStyle {
+  box-sizing: border-box;
+  width: 6rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
+
+.TypeDiv {
+  width: 100px;
+  height: 2rem;
+}
+
+.SpanStyle {
+  text-transform: uppercase;
+  color: white;
+  font-weight: 500;
+}
+
+.TestStyle {
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.Number {
+  margin-left: auto;
+}
+.StatContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.StatName {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.StatValue {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+}
+
+.normal {
+  background-color: #a8a878;
+  border: solid 1px #a8a878;
+}
+
+.fire {
+  background-color: #f08030;
+  border: solid 1px #f08030;
+}
+
+.fighting {
+  background-color: #c03028;
+  border: solid 1px #c03028;
+}
+
+.water {
+  background-color: #6890f0;
+  border: solid 1px #6890f0;
+}
+
+.flying {
+  background-color: #a890f0;
+  border: solid 1px #a890f0;
+}
+
+.grass {
+  background-color: #78c850;
+  border: solid 1px #78c850;
+}
+
+.poison {
+  background-color: #a040a0;
+  border: solid 1px #a040a0;
+}
+
+.electric {
+  background-color: #f8d030;
+  border: solid 1px #f8d030;
+}
+
+.ground {
+  background-color: #e0c068;
+  border: solid 1px #e0c068;
+}
+
+.psychic {
+  background-color: #f85888;
+  border: solid 1px #f85888;
+}
+
+.rock {
+  background-color: #b8a038;
+  border: solid 1px #b8a038;
+}
+
+.ice {
+  background-color: #98d8d8;
+  border: solid 1px #98d8d8;
+}
+
+.bug {
+  background-color: #a8b820;
+  border: solid 1px #a8b820;
+}
+
+.dragon {
+  background-color: #7038f8;
+  border: solid 1px #7038f8;
+}
+
+.ghost {
+  background-color: #705898;
+  border: solid 1px #705898;
+}
+
+.dark {
+  background-color: #705848;
+  border: solid 1px #705848;
+}
+
+.steel {
+  background-color: #b8b8d0;
+  border: solid 1px #b8b8d0;
+}
+
+.fairy {
+  background-color: #ee99ac;
+  border: solid 1px #ee99ac;
+}

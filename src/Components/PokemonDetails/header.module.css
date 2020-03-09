@@ -1,0 +1,11 @@
+.Header {
+  text-align: center;
+  /* border: 1px solid red; */
+  /* background-color: green; */
+}
+
+.PokeName {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}

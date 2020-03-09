@@ -6,16 +6,25 @@ import thunk from "redux-thunk";
 
 import "./index.css";
 import App from "./App";
-import reducer from "./Store/reducers/pokemonLists";
+import pokemonListsReducer from "./Store/reducers/pokemonLists";
+import basicsReducer from "./Store/reducers/pokemonBasics";
+import speciesReducer from "./Store/reducers/pokemonSpecies";
+import damageReducer from "./Store/reducers/pokemonDamage";
 import * as serviceWorker from "./serviceWorker";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// const rootReducer = combineReducers({
-//   pokemonList: pokemonListsReducer
-// });
+const rootReducer = combineReducers({
+  pokemonList: pokemonListsReducer,
+  basics: basicsReducer,
+  species: speciesReducer,
+  damage: damageReducer
+});
 
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 const app = (
   <Provider store={store}>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../Share/axios";
 import PokemonCard from "../../Components/PokemonCard/PokemonCard";
-// import { Link } from "react-router-dom";
+import PokemonDescription from "../PokemonDescription/PokemonDescription";
+import { Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionTypes from "../../Store/actions/actionTypes";
 
@@ -10,6 +12,7 @@ import classes from "./PokemonLists.module.css";
 // import pokemonCard from "../../Components/PokemonCard/PokemonCard";
 
 export function PokemonLists(props) {
+  const [params, setParams] = useState("");
   useEffect(() => {
     axios
       .get("pokemon/?limit=151")
@@ -23,6 +26,10 @@ export function PokemonLists(props) {
       });
   }, []);
 
+  const selectedHandler = id => {
+    setParams({ params: id });
+  };
+
   //   console.log(props.pml);
 
   return (
@@ -30,9 +37,11 @@ export function PokemonLists(props) {
       {props.pml.map(pokomon => (
         <div className={classes.PokeContainer}>
           <PokemonCard
+            key={pokomon.id}
             className={classes.PokeCard}
             number={pokomon.id}
             name={pokomon.name}
+            clicked={() => selectedHandler(pokomon.id)}
           />
         </div>
       ))}
@@ -42,7 +51,7 @@ export function PokemonLists(props) {
 
 const mapStateToProps = state => {
   return {
-    pml: state.pokemonLists
+    pml: state.pokemonList.pokemonLists
   };
 };
 

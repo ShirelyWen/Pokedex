@@ -1,0 +1,31 @@
+.ProfileContainer {
+  margin-top: 10px;
+  padding: 10px 10px;
+}
+
+.ContentContainer {
+  width: 80%;
+  padding: 15px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+}
+
+.LeftContainer,
+.RightContainer {
+  display: flex;
+  flex-direction: row;
+}
+.LeftName,
+.LeftValue {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-right: 8px;
+}
+
+.RightContainer {
+  margin-left: auto;
+}

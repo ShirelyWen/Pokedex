@@ -3,6 +3,7 @@ import "./App.css";
 import PokemonLists from "./Container/PokemonLists/PokemonLists";
 import EmporaryDrawer from "./Components/UI/Navbar/Navbar";
 import BasicTextFields from "./Components/UI/Search/Search";
+import PokemonDescription from "./Container/PokemonDescription/PokemonDescription";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <EmporaryDrawer />
       <BasicTextFields />
       <PokemonLists />
+      {/* <PokemonDescription /> */}
     </div>
   );
 }

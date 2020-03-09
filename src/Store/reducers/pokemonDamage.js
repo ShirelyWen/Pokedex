@@ -1,26 +1,23 @@
 import * as actionTypes from "../actions/actionTypes";
+// import { updateObject } from "../../Share/utility";
 
 const initialState = {
   id: "",
-  name: "",
-  types: [],
-  status: []
+  damageDoubel: [],
+  damageHalf: []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_POKEMON:
-      const newPokemon = {
-        id: action.pokemonData.id,
-        name: action.pokemonData.name
-      };
+    case actionTypes.ADD_DAMAGE:
       return {
         ...state,
-        pokemonLists: state.pokemonLists.concat(newPokemon)
+        id: action.id,
+        damageDoubel: action.damageDoubel,
+        damageHalf: action.damageHalf
       };
     default:
       return state;
   }
 };
-
 export default reducer;
