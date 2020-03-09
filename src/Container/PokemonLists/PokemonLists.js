@@ -2,17 +2,32 @@ import React, { useState, useEffect } from "react";
 import axios from "../../Share/axios";
 import PokemonCard from "../../Components/PokemonCard/PokemonCard";
 import PokemonDescription from "../PokemonDescription/PokemonDescription";
-import { Link } from "react-router-dom";
-import { Route } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { Route } from "react-router-dom";
+import Modal from "react-modal";
 import { connect } from "react-redux";
 import * as actionTypes from "../../Store/actions/actionTypes";
 
 import classes from "./PokemonLists.module.css";
 // import PropTypes from "prop-types";
-// import pokemonCard from "../../Components/PokemonCard/PokemonCard";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "white",
+    width: "100%",
+    height: "100%"
+  }
+};
 
 export function PokemonLists(props) {
-  const [params, setParams] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     axios
       .get("pokemon/?limit=151")
@@ -26,8 +41,21 @@ export function PokemonLists(props) {
       });
   }, []);
 
+  useEffect(() => {
+    Modal.setAppElement("body");
+  });
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   const selectedHandler = id => {
-    setParams({ params: id });
+    props.getPokemonDetail(id);
+    props.getPokemonBasicInfo(id);
   };
 
   //   console.log(props.pml);
@@ -41,10 +69,19 @@ export function PokemonLists(props) {
             className={classes.PokeCard}
             number={pokomon.id}
             name={pokomon.name}
-            clicked={() => selectedHandler(pokomon.id)}
+            clicked={() => {
+              selectedHandler(pokomon.id);
+              openModal();
+            }}
           />
         </div>
       ))}
+      <Modal isOpen={modalIsOpen} style={customStyles}>
+        <button onClick={closeModal} className={classes.buttonStyle}>
+          BACK
+        </button>
+        <PokemonDescription />
+      </Modal>
     </div>
   );
 }
@@ -61,7 +98,13 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: actionTypes.ADD_POKEMON,
         pokemonData: { id: id, name: name }
-      })
+      }),
+    getPokemonDetail: id => {
+      dispatch(actionTypes.ADD_POKEMONDETAIL(id));
+    },
+    getPokemonBasicInfo: id => {
+      dispatch(actionTypes.initBasicInfo(id));
+    }
   };
 };
 

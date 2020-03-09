@@ -4,9 +4,9 @@ import React from "react";
 import classes from "./PokemonCard.module.css";
 
 const pokemonCard = props => {
-  console.log(props);
+  // console.log(props);
   return (
-    <div className={classes.PokoCard}>
+    <div className={classes.PokoCard} onClick={props.clicked}>
       <div className={classes.ImageContainer}>
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${props.number}.png`}

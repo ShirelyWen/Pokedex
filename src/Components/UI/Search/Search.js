@@ -12,12 +12,16 @@ const useStyles = makeStyles({
   }
 });
 
-export default function BasicTextFields() {
+export default function BasicTextFields(props) {
   const classes = useStyles();
 
   return (
     <form className={classes.searchInput} noValidate autoComplete="off">
-      <TextField id="standard-basic" label="Search for Pokémon" />
+      <TextField
+        id="standard-basic"
+        label="Search for Pokémon"
+        onChange={props.changed}
+      />
     </form>
   );
 }

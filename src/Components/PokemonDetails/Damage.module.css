@@ -1,0 +1,24 @@
+.DamageContainer {
+  margin-top: 10px;
+  padding: 10px 10px;
+}
+
+.ContentContainer {
+  width: 80%;
+  padding: 15px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+}
+
+.LeftItmes,
+.RightItems {
+  display: flex;
+  flex-direction: row;
+}
+
+.DoubleContainer,
+.HalfContainer {
+}

@@ -1,8 +1,10 @@
 .DetailsContainer {
+  margin-top: 300px;
   width: 50%;
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  background-color: aqua;
 }

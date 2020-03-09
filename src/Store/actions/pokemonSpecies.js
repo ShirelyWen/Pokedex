@@ -17,8 +17,25 @@ export const setSpeciesInfo = info => {
 export const initSpeciesInfo = () => {
   return dispatch => {
     axios
-      .get("pokemon-species/1/")
+      .get("pokemon-species/")
       .then(response => {
+        console.log(response.data);
+        dispatch(setSpeciesInfo(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const ADD_POKEMONDETAIL = id => {
+  // console.log("afdsfads");
+  // console.log(id);
+  return dispatch => {
+    axios
+      .get(`pokemon-species/${id}/`)
+      .then(response => {
+        // console.log(response.data);
         dispatch(setSpeciesInfo(response.data));
       })
       .catch(error => {

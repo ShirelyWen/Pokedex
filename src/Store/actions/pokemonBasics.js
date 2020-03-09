@@ -20,13 +20,12 @@ export const setBasicInfo = info => {
   };
 };
 
-export const initBasicInfo = () => {
-  return dispatch => {
-    axios
-      .get("pokemon/1/")
-      .then(response => {
-        dispatch(setBasicInfo(response.data));
-      })
-      .catch(error => {});
+export const initBasicInfo = id => {
+  console.log(id);
+  return async dispatch => {
+    const { data } = await axios.get(`pokemon/${id}/`);
+    dispatch(setBasicInfo(data));
+    dispatch(actionTypes.initDamageInfo(data.types));
+    // await axios.get;
   };
 };
