@@ -27,8 +27,8 @@ const customStyles = {
 
 export function PokemonLists(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState("");
-
+  const [filterValue, setFilterValue] = useState("");
+  console.log(filterValue);
   useEffect(() => {
     axios
       .get("pokemon/?limit=151")
@@ -46,17 +46,8 @@ export function PokemonLists(props) {
     Modal.setAppElement("body");
   });
 
-  // let filterValue = "";
   const inputChangeHandler = event => {
-    // filterValue = event.target.value;
-    // console.log(filterValue);
-    // props.onInitFilterInfo(filterValue);
-    // props.pml.map(pokemon => {
-    //   if (pokemon.name.startsWith(filterValue)) {
-    //     props.onAddedFilter(pokemon.id, pokemon.name);
-    //   }
-    // });
-    setSearch({ search: event.target.value });
+    setFilterValue(event.target.value);
   };
 
   const openModal = () => {
@@ -71,24 +62,19 @@ export function PokemonLists(props) {
     props.getPokemonDetail(id);
     props.getPokemonBasicInfo(id);
   };
-  console.log(search.search);
 
-  // const { search } = search;
   const filteredPoko = props.pml.filter(pokomon => {
+    console.log(typeof filterValue);
+    console.log(filterValue.toLowerCase());
     return (
-      pokomon.name
-        .toString()
-        .toLowerCase()
-        .indexOf(search.search.toString().toLowerCase()) !== -1
+      pokomon.name.toLowerCase().startsWith(filterValue.toLowerCase()) !== false
     );
   });
+
   const renderPoko = pokomon => {
     if (
-      search.search.toString() !== "" &&
-      pokomon.name
-        .toString()
-        .toLowerCase()
-        .indexOf(search.search.toString().toLowerCase()) === -1
+      filterValue.filterValue !== "" &&
+      pokomon.name.toLowerCase().indexOf(filterValue.toLowerCase()) === -1
     ) {
       return null;
     }
@@ -108,29 +94,33 @@ export function PokemonLists(props) {
     );
   };
 
-  console.log(search.search.toString());
-
   return (
     <div className={classes.PokoCards}>
       <div>
         <BasicTextFields changed={inputChangeHandler} />
       </div>
       <div className={classes.PokeCardContainer}>
-        {filteredPoko.map(pokomon => {
-          // <div key={pokomon.id} className={classes.PokeContainer}>
-          //   <PokemonCard
-          //     key={pokomon.id}
-          //     className={classes.PokeCard}
-          //     number={pokomon.id}
-          //     name={pokomon.name}
-          //     clicked={() => {
-          //       selectedHandler(pokomon.id);
-          //       openModal();
-          //     }}
-          //   />
-          // </div>
+        {filterValue === ""
+          ? props.pml.map(pokomon => (
+              <div key={pokomon.id} className={classes.PokeContainer}>
+                <PokemonCard
+                  key={pokomon.id}
+                  className={classes.PokeCard}
+                  number={pokomon.id}
+                  name={pokomon.name}
+                  clicked={() => {
+                    selectedHandler(pokomon.id);
+                    openModal();
+                  }}
+                />
+              </div>
+            ))
+          : filteredPoko.map(pokomon => {
+              return renderPoko(pokomon);
+            })}
+        {/* {filteredPoko.map(pokomon => {
           return renderPoko(pokomon);
-        })}
+        })} */}
       </div>
       <Modal isOpen={modalIsOpen} style={customStyles}>
         <button onClick={closeModal} className={classes.buttonStyle}>
