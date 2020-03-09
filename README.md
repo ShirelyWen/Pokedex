@@ -5,7 +5,7 @@ First download the Project and you can run
 
 ### `npm install` or `yarn install` 
 
-in vscode ternimal or local terminal 
+in vscode terminal or local terminal 
 
 to automaitically install the node modules
 
@@ -14,7 +14,7 @@ After install successfully, you can run:
 ### `npm start` or `yarn start` 
 
 to run the app in the development mode.<br />
-Generally it will automaticlly open the default browser, if not, manually open [http://localhost:3000](http://localhost:3000) 
+Generally it will automatically open the default browser, if not, manually open [http://localhost:3000](http://localhost:3000) 
 
 to view it in the browser.
 
