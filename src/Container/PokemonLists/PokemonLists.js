@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "../../Share/axios";
 import PokemonCard from "../../Components/PokemonCard/PokemonCard";
 import PokemonDescription from "../PokemonDescription/PokemonDescription";
-// import { Link } from "react-router-dom";
-// import { Route } from "react-router-dom";
+import BasicTextFields from "../../Components/UI/Search/Search";
+
 import Modal from "react-modal";
 import { connect } from "react-redux";
 import * as actionTypes from "../../Store/actions/actionTypes";
@@ -27,6 +27,7 @@ const customStyles = {
 
 export function PokemonLists(props) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios
@@ -45,6 +46,19 @@ export function PokemonLists(props) {
     Modal.setAppElement("body");
   });
 
+  // let filterValue = "";
+  const inputChangeHandler = event => {
+    // filterValue = event.target.value;
+    // console.log(filterValue);
+    // props.onInitFilterInfo(filterValue);
+    // props.pml.map(pokemon => {
+    //   if (pokemon.name.startsWith(filterValue)) {
+    //     props.onAddedFilter(pokemon.id, pokemon.name);
+    //   }
+    // });
+    setSearch({ search: event.target.value });
+  };
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -57,25 +71,67 @@ export function PokemonLists(props) {
     props.getPokemonDetail(id);
     props.getPokemonBasicInfo(id);
   };
+  console.log(search.search);
 
-  //   console.log(props.pml);
+  // const { search } = search;
+  const filteredPoko = props.pml.filter(pokomon => {
+    return (
+      pokomon.name
+        .toString()
+        .toLowerCase()
+        .indexOf(search.search.toString().toLowerCase()) !== -1
+    );
+  });
+  const renderPoko = pokomon => {
+    if (
+      search.search.toString() !== "" &&
+      pokomon.name
+        .toString()
+        .toLowerCase()
+        .indexOf(search.search.toString().toLowerCase()) === -1
+    ) {
+      return null;
+    }
+    return (
+      <div key={pokomon.id} className={classes.PokeContainer}>
+        <PokemonCard
+          key={pokomon.id}
+          className={classes.PokeCard}
+          number={pokomon.id}
+          name={pokomon.name}
+          clicked={() => {
+            selectedHandler(pokomon.id);
+            openModal();
+          }}
+        />
+      </div>
+    );
+  };
+
+  console.log(search.search.toString());
 
   return (
     <div className={classes.PokoCards}>
-      {props.pml.map(pokomon => (
-        <div className={classes.PokeContainer}>
-          <PokemonCard
-            key={pokomon.id}
-            className={classes.PokeCard}
-            number={pokomon.id}
-            name={pokomon.name}
-            clicked={() => {
-              selectedHandler(pokomon.id);
-              openModal();
-            }}
-          />
-        </div>
-      ))}
+      <div>
+        <BasicTextFields changed={inputChangeHandler} />
+      </div>
+      <div className={classes.PokeCardContainer}>
+        {filteredPoko.map(pokomon => {
+          // <div key={pokomon.id} className={classes.PokeContainer}>
+          //   <PokemonCard
+          //     key={pokomon.id}
+          //     className={classes.PokeCard}
+          //     number={pokomon.id}
+          //     name={pokomon.name}
+          //     clicked={() => {
+          //       selectedHandler(pokomon.id);
+          //       openModal();
+          //     }}
+          //   />
+          // </div>
+          return renderPoko(pokomon);
+        })}
+      </div>
       <Modal isOpen={modalIsOpen} style={customStyles}>
         <button onClick={closeModal} className={classes.buttonStyle}>
           BACK
@@ -88,7 +144,8 @@ export function PokemonLists(props) {
 
 const mapStateToProps = state => {
   return {
-    pml: state.pokemonList.pokemonLists
+    pml: state.pokemonList.pokemonLists,
+    pmf: state.filter.filterLists
   };
 };
 
@@ -99,6 +156,11 @@ const mapDispatchToProps = dispatch => {
         type: actionTypes.ADD_POKEMON,
         pokemonData: { id: id, name: name }
       }),
+    onInitFilterInfo: inputValue => dispatch(actionTypes.initFilterInfo()),
+    // onDeleteFilter: () =>
+    //   dispatch({
+    //     type: actionTypes.DELETE_FILTER
+    //   }),
     getPokemonDetail: id => {
       dispatch(actionTypes.ADD_POKEMONDETAIL(id));
     },

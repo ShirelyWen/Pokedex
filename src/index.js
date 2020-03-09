@@ -10,6 +10,7 @@ import pokemonListsReducer from "./Store/reducers/pokemonLists";
 import basicsReducer from "./Store/reducers/pokemonBasics";
 import speciesReducer from "./Store/reducers/pokemonSpecies";
 import damageReducer from "./Store/reducers/pokemonDamage";
+import filterReducer from "./Store/reducers/pokemonFilter";
 import * as serviceWorker from "./serviceWorker";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   pokemonList: pokemonListsReducer,
   basics: basicsReducer,
   species: speciesReducer,
-  damage: damageReducer
+  damage: damageReducer,
+  filter: filterReducer
 });
 
 const store = createStore(

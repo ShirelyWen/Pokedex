@@ -19,7 +19,7 @@ export const initSpeciesInfo = () => {
     axios
       .get("pokemon-species/")
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(setSpeciesInfo(response.data));
       })
       .catch(error => {

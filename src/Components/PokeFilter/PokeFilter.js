@@ -1,44 +1,26 @@
-import React, { useState } from "react";
-import BasicTextFields from "../UI/Search/Search";
-import PokemonCard from "../PokemonCard/PokemonCard";
+import React from "react";
 import { connect } from "react-redux";
+import * as actionTypes from "../../Store/actions/actionTypes";
 
-export function PokeFilter(props) {
-  const [searchValue, setSearchValue] = useState("");
-  const [dispayObj, setDisplayObj] = useState({});
-  const filterHandler = event => {
-    event.preventDefault();
-    const value = searchValue;
-    props.pml.map(element => {
-      for (let key in element) {
-        if (
-          String(element[key])
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        ) {
-          const updatedObj = element;
-          setDisplayObj({ dispayObj: { ...dispayObj, updatedObj } });
-        }
-      }
-    });
-  };
-  return (
-    <div>
-      <form onSubmit={filterHandler}>
-        <BasicTextFields
-          changed={event => setSearchValue(event.target.value)}
-        />
-      </form>
-
-      {/* <PokemonCard name={dispayObj.name} number={setDisplayObj.id} /> */}
-    </div>
-  );
+export function PokeFilter() {
+  return <div></div>;
 }
 
 const mapStateToProps = state => {
   return {
-    pml: state.pokemonList.pokemonLists
+    pml: state.pokemonList.pokemonLists,
+    pmf: state.filter.filterLists
   };
 };
 
-export default connect(mapStateToProps)(PokeFilter);
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddedPokemon: (id, name) =>
+      dispatch({
+        type: actionTypes.ADD_FILTER,
+        pokemonData: { id: id, name: name }
+      })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PokeFilter);

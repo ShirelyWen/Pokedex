@@ -13,10 +13,10 @@ export default function OverView(props) {
       <div className={classes.DetailsContainer}>
         <div className={classes.TypeConatiner}>
           <div className={classes.TypeStyle}>
-            {props.types.map(type => {
+            {props.types.map((type, index) => {
               let classes = ["TypeDiv", type].join(" ");
               return (
-                <div className={classes}>
+                <div key={index + 20} className={classes}>
                   <span className={classes.TestStyle}>{type}</span>
                 </div>
               );
@@ -28,13 +28,17 @@ export default function OverView(props) {
         </div>
         <div className={classes.StatContainer}>
           <div className={classes.StatName}>
-            {props.status.map(status => {
-              return <span className={classes.TestStyle}>{status[0]}</span>;
+            {props.status.map((status, index) => {
+              return (
+                <span key={index + 30} className={classes.TestStyle}>
+                  {status[0]}
+                </span>
+              );
             })}
           </div>
           <div className={classes.StatValue}>
-            {props.status.map(status => {
-              return <span>{status[1]}</span>;
+            {props.status.map((status, index) => {
+              return <span key={index + 40}>{status[1]}</span>;
             })}
           </div>
         </div>

@@ -20,9 +20,9 @@ export default function Damage(props) {
       </div>
       <div className={classes.ContentContainer}>
         <div className={classes.DoubleContainer}>
-          {props.double.map(p => {
+          {props.double.map((p, index) => {
             return (
-              <div className={classes.LeftItmes}>
+              <div key={index} className={classes.LeftItmes}>
                 <div className={p} style={divStyle}>
                   <span>{p}</span>
                 </div>
@@ -34,9 +34,9 @@ export default function Damage(props) {
           })}
         </div>
         <div className={classes.HalfContainer}>
-          {props.half.map(p => {
+          {props.half.map((p, index) => {
             return (
-              <div className={classes.RightItems}>
+              <div key={index + 10} className={classes.RightItems}>
                 <div className={p} style={divStyle}>
                   <span>{p}</span>
                 </div>
